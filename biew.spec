@@ -11,7 +11,6 @@ License:	GPL
 Group:		File tools
 URL:		http://biew.sourceforge.net
 Source:		%{name}-%{versrc}.tar.bz2
-BuildRoot: 	%_tmppath/%name-%version-buildroot
 ExclusiveArch:	%ix86
 
 %description
