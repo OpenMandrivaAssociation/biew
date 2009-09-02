@@ -1,7 +1,7 @@
 %define name	biew
 %define version	5.6.4
 %define versrc	564
-%define release	%mkrel 3
+%define release	%mkrel 4
 
 Name:		%{name}
 Version:	%{version}
