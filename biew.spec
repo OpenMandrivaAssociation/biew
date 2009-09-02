@@ -27,7 +27,7 @@ Linux, Unix, QNX, BeOS, DOS, Win32, OS/2 versions are available.
 
 %prep
 %setup -q -n %{name}-%{versrc}
-%configure
+%configure2_5x
 
 %build
 make TARGET_OS=linux USE_MOUSE=n PREFIX=%_prefix
