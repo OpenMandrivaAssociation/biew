@@ -1,7 +1,7 @@
 %define name	biew
-%define version	5.6.4
-%define versrc	564
-%define release	%mkrel 4
+%define version	6.1.0
+%define versrc	610
+%define release	%mkrel 
 
 Name:		%{name}
 Version:	%{version}
@@ -13,7 +13,7 @@ URL:		http://biew.sourceforge.net
 Source:		%{name}-%{versrc}.tar.bz2
 BuildRoot: 	%_tmppath/%name-%version-buildroot
 ExclusiveArch:	%ix86
-
+Provides:	ncurses
 %description
 BIEW (Binary vIEW) is a free, portable, advanced file viewer with
 built-in editor for binary, hexadecimal and disassembler modes.
@@ -30,6 +30,7 @@ Linux, Unix, QNX, BeOS, DOS, Win32, OS/2 versions are available.
 %configure2_5x
 
 %build
+./configure --enable-curses --prefix=/usr
 make TARGET_OS=linux USE_MOUSE=n PREFIX=%_prefix
 
 %install
