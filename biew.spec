@@ -1,19 +1,19 @@
 %define name	biew
 %define version	6.1.0
 %define versrc	610
-%define release	%mkrel 
+%define release	%mkrel 1
 
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Summary:	Console hex viewer/editor and disassembler
-License:	GPL
+License:	GPLv2+
 Group:		File tools
 URL:		http://biew.sourceforge.net
 Source:		%{name}-%{versrc}.tar.bz2
-BuildRoot: 	%_tmppath/%name-%version-buildroot
+BuildRoot:	%_tmppath/%name-%version-buildroot
 ExclusiveArch:	%ix86
-Provides:	ncurses
+
 %description
 BIEW (Binary vIEW) is a free, portable, advanced file viewer with
 built-in editor for binary, hexadecimal and disassembler modes.
@@ -27,10 +27,9 @@ Linux, Unix, QNX, BeOS, DOS, Win32, OS/2 versions are available.
 
 %prep
 %setup -q -n %{name}-%{versrc}
-%configure2_5x
 
 %build
-./configure --enable-curses --prefix=/usr
+./configure --enable-curses --prefix=%_prefix
 make TARGET_OS=linux USE_MOUSE=n PREFIX=%_prefix
 
 %install
@@ -38,8 +37,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d ${RPM_BUILD_ROOT}{%{_bindir},%{_datadir}/%{name},%{_mandir}/man1}
 
 install -m 755 biew $RPM_BUILD_ROOT%{_bindir}/%{name}
-strip -R .note -R .comment $RPM_BUILD_ROOT%{_bindir}/%{name}
-
 cp -a bin_rc/{xlt,skn,*.hlp} $RPM_BUILD_ROOT%{_datadir}/%{name}
 install doc/biew.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
