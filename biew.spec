@@ -29,7 +29,7 @@ Linux, Unix, QNX, BeOS, DOS, Win32, OS/2 versions are available.
 %setup -q -n %{name}-%{versrc}
 
 %build
-./configure --enable-curses --prefix=%_prefix
+./configure --enable-curses --libdir=%{_libdir} --prefix=%_prefix
 make TARGET_OS=linux USE_MOUSE=n PREFIX=%_prefix
 
 %install
