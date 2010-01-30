@@ -11,6 +11,7 @@ License:	GPLv2+
 Group:		File tools
 URL:		http://biew.sourceforge.net
 Source:		%{name}-%{versrc}.tar.bz2
+Patch0:		biew-fix-str-fmt.patch
 BuildRoot:	%_tmppath/%name-%version-buildroot
 ExclusiveArch:	%ix86
 
@@ -27,8 +28,10 @@ Linux, Unix, QNX, BeOS, DOS, Win32, OS/2 versions are available.
 
 %prep
 %setup -q -n %{name}-%{versrc}
+%patch0 -p0
 
 %build
+#we can't use %configure2_5x because we need the mm/xmm registers
 ./configure --enable-curses --libdir=%{_libdir} --prefix=%_prefix
 make TARGET_OS=linux USE_MOUSE=n PREFIX=%_prefix
 
