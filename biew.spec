@@ -32,6 +32,8 @@ Linux, Unix, QNX, BeOS, DOS, Win32, OS/2 versions are available.
 
 %build
 #we can't use %configure2_5x because we need the mm/xmm registers
+CFLAGS=$RPM_OPT_FLAGS" -mmmx -msse"
+CXXFLAGS=$RPM_OPT_FLASG" -mmmx -msse"
 ./configure --enable-curses --libdir=%{_libdir} --prefix=%_prefix
 make TARGET_OS=linux USE_MOUSE=n PREFIX=%_prefix
 
