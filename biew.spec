@@ -1,7 +1,7 @@
 %define name	biew
 %define version	6.1.0
 %define versrc	610
-%define release	%mkrel 1
+%define release	%mkrel 2
 
 Name:		%{name}
 Version:	%{version}
@@ -11,7 +11,7 @@ License:	GPLv2+
 Group:		File tools
 URL:		http://biew.sourceforge.net
 Source:		%{name}-%{versrc}.tar.bz2
-Patch0:		biew-fix-str-fmt.patch
+Patch0:		biew610-fix-str-fmt.patch
 BuildRoot:	%_tmppath/%name-%version-buildroot
 ExclusiveArch:	%ix86
 
