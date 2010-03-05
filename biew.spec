@@ -11,6 +11,7 @@ License:	GPLv2+
 Group:		File tools
 URL:		http://biew.sourceforge.net
 Source:		%{name}-%{versrc}.tar.bz2
+#patch0 sent upstream (Kharec)
 Patch0:		biew610-fix-str-fmt.patch
 BuildRoot:	%_tmppath/%name-%version-buildroot
 ExclusiveArch:	%ix86
