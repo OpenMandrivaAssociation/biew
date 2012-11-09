@@ -1,0 +1,32 @@
+Index: bconsole.c
+===================================================================
+--- bconsole.c
++++ bconsole.c	2010-01-30 21:15:04.000000000 +0100
+@@ -869,12 +869,12 @@
+                       if(p)
+                       {
+                         *p = 0;
+-                        fprintf(out,names[i]);
++                        fprintf(out, "%s", names[i]);
+                         for(j = p - names[i];j < 50;j++) fprintf(out," ");
+                         fprintf(out," @%s",p+1);
+                         if(p) *p = LB_ORD_DELIMITER;
+                       }
+-                      else fprintf(out,names[i]);
++                      else fprintf(out, "%s", names[i]);
+                       fprintf(out,"\n");
+                     }
+                     fclose(out);
+Index: plugins/disasm/avr/avr.c
+===================================================================
+--- plugins/disasm/avr/avr.c
++++ plugins/disasm/avr/avr.c	2010-01-30 21:12:53.000000000 +0100
+@@ -143,7 +143,7 @@
+ 	    case 0x100e: xyz = "-X"; break;
+ 	    default: xyz = "??"; ok = 0;
+ 	  }
+-	sprintf (buf, xyz);
++	sprintf (buf, "%s", xyz);
+ 
+ 	if (AVR_UNDEF_P (insn))
+ 	  sprintf (comment, _("undefined"));
