@@ -56,3 +56,46 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
 %{_mandir}/man?/%{name}.1*
+
+
+%changelog
+* Sun Dec 05 2010 Oden Eriksson <oeriksson@mandriva.com> 6.1.0-3mdv2011.0
++ Revision: 610069
+- rebuild
+
+  + Sandro Cazzaniga <kharec@mandriva.org>
+    - Patch sent upstream
+
+* Sun Feb 28 2010 Sandro Cazzaniga <kharec@mandriva.org> 6.1.0-2mdv2010.1
++ Revision: 512662
+- Specifies the version of the patch
+
+* Sat Jan 30 2010 Rémy Clouard <shikamaru@mandriva.org> 6.1.0-1mdv2010.1
++ Revision: 498652
+- add CFLAGS and CXXFLAGS
+
+  + Sandro Cazzaniga <kharec@mandriva.org>
+    - Add a patch for fix strings
+    - Add comment for explain why we can't use %%configure2_5x
+    - Update to version 610
+    - fix rpmlint warning with --libdir=%%{_libdir}
+    - fix rpmlint's warning, licence and mkrel
+    - update to 6.1.0
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - fix build (use %%configure2_5x)
+    - rebuild
+
+* Tue Jul 22 2008 Thierry Vignaud <tv@mandriva.org> 5.6.4-3mdv2009.0
++ Revision: 240444
+- rebuild
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Tue Apr 17 2007 Erwan Velu <erwan@mandriva.org> 5.6.4-1mdv2008.0
++ Revision: 13987
+- Exclusive arch
+- Import biew
+
