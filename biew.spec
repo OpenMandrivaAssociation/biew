@@ -1,20 +1,19 @@
-%define name	biew
-%define version	6.1.0
-%define versrc	610
-%define release	%mkrel 3
+%define _enable_debug_packages %{nil}
+%define debug_package %{nil}
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+%define versrc 610
+
 Summary:	Console hex viewer/editor and disassembler
+Name:		biew
+Version:	6.1.0
+Release:	4
 License:	GPLv2+
 Group:		File tools
-URL:		http://biew.sourceforge.net
-Source:		%{name}-%{versrc}.tar.bz2
+Url:		http://biew.sourceforge.net
+Source0:	%{name}-%{versrc}.tar.bz2
 #patch0 sent upstream (Kharec)
 Patch0:		biew610-fix-str-fmt.patch
-BuildRoot:	%_tmppath/%name-%version-buildroot
-ExclusiveArch:	%ix86
+ExclusiveArch:	%{ix86}
 
 %description
 BIEW (Binary vIEW) is a free, portable, advanced file viewer with
@@ -27,75 +26,31 @@ other features, making it invaluable for examining binary code.
 
 Linux, Unix, QNX, BeOS, DOS, Win32, OS/2 versions are available.
 
+%files
+%doc doc/biew_en.txt doc/biew_ru.txt doc/unix.txt doc/release.txt
+%{_bindir}/%{name}
+%{_datadir}/%{name}/*
+%{_mandir}/man?/%{name}.1*
+
+#----------------------------------------------------------------------------
+
 %prep
 %setup -q -n %{name}-%{versrc}
 %patch0 -p0
 
 %build
 #we can't use %configure2_5x because we need the mm/xmm registers
-CFLAGS=$RPM_OPT_FLAGS" -mmmx -msse"
-CXXFLAGS=$RPM_OPT_FLASG" -mmmx -msse"
-./configure --enable-curses --libdir=%{_libdir} --prefix=%_prefix
-make TARGET_OS=linux USE_MOUSE=n PREFIX=%_prefix
+CFLAGS="%{optflags} -mmmx -msse"
+CXXFLAGS="%{optflags} -mmmx -msse"
+./configure --enable-curses --libdir=%{_libdir} --prefix=%{_prefix}
+make TARGET_OS=linux USE_MOUSE=n PREFIX=%{_prefix}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-install -d ${RPM_BUILD_ROOT}{%{_bindir},%{_datadir}/%{name},%{_mandir}/man1}
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_datadir}/%{name}
+mkdir -p %{buildroot}%{_mandir}/man1
 
-install -m 755 biew $RPM_BUILD_ROOT%{_bindir}/%{name}
-cp -a bin_rc/{xlt,skn,*.hlp} $RPM_BUILD_ROOT%{_datadir}/%{name}
-install doc/biew.1 $RPM_BUILD_ROOT%{_mandir}/man1
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%files
-%defattr(-,root,root)
-%doc doc/biew_en.txt doc/biew_ru.txt doc/unix.txt doc/release.txt
-
-%{_bindir}/%{name}
-%{_datadir}/%{name}/*
-%{_mandir}/man?/%{name}.1*
-
-
-%changelog
-* Sun Dec 05 2010 Oden Eriksson <oeriksson@mandriva.com> 6.1.0-3mdv2011.0
-+ Revision: 610069
-- rebuild
-
-  + Sandro Cazzaniga <kharec@mandriva.org>
-    - Patch sent upstream
-
-* Sun Feb 28 2010 Sandro Cazzaniga <kharec@mandriva.org> 6.1.0-2mdv2010.1
-+ Revision: 512662
-- Specifies the version of the patch
-
-* Sat Jan 30 2010 Rémy Clouard <shikamaru@mandriva.org> 6.1.0-1mdv2010.1
-+ Revision: 498652
-- add CFLAGS and CXXFLAGS
-
-  + Sandro Cazzaniga <kharec@mandriva.org>
-    - Add a patch for fix strings
-    - Add comment for explain why we can't use %%configure2_5x
-    - Update to version 610
-    - fix rpmlint warning with --libdir=%%{_libdir}
-    - fix rpmlint's warning, licence and mkrel
-    - update to 6.1.0
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - fix build (use %%configure2_5x)
-    - rebuild
-
-* Tue Jul 22 2008 Thierry Vignaud <tv@mandriva.org> 5.6.4-3mdv2009.0
-+ Revision: 240444
-- rebuild
-- kill re-definition of %%buildroot on Pixel's request
-
-  + Olivier Blin <oblin@mandriva.com>
-    - restore BuildRoot
-
-* Tue Apr 17 2007 Erwan Velu <erwan@mandriva.org> 5.6.4-1mdv2008.0
-+ Revision: 13987
-- Exclusive arch
-- Import biew
+install -m 755 %{name} %{buildroot}%{_bindir}/%{name}
+cp -a bin_rc/{xlt,skn,*.hlp} %{buildroot}%{_datadir}/%{name}
+install -m 0644 doc/biew.1 %{buildroot}%{_mandir}/man1
 
