@@ -6,7 +6,7 @@
 Summary:	Console hex viewer/editor and disassembler
 Name:		biew
 Version:	6.1.0
-Release:	4
+Release:	5
 License:	GPLv2+
 Group:		File tools
 Url:		http://biew.sourceforge.net
