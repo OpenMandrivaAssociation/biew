@@ -15,6 +15,8 @@ Source0:	%{name}-%{versrc}.tar.bz2
 Patch0:		biew610-fix-str-fmt.patch
 ExclusiveArch:	%{ix86}
 
+BuildRequires:	gcc-c++, gcc, gcc-cpp
+
 %description
 BIEW (Binary vIEW) is a free, portable, advanced file viewer with
 built-in editor for binary, hexadecimal and disassembler modes.
@@ -39,6 +41,8 @@ Linux, Unix, QNX, BeOS, DOS, Win32, OS/2 versions are available.
 %patch0 -p0
 
 %build
+export CC=gcc
+export CXX=g++
 #we can't use %configure2_5x because we need the mm/xmm registers
 CFLAGS="%{optflags} -mmmx -msse"
 CXXFLAGS="%{optflags} -mmmx -msse"
