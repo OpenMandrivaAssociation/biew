@@ -9,7 +9,7 @@ Version:	6.1.0
 Release:	5
 License:	GPLv2+
 Group:		File tools
-Url:		http://biew.sourceforge.net
+Url:		https://biew.sourceforge.net
 Source0:	%{name}-%{versrc}.tar.bz2
 Source100:  %{name}.rpmlintrc
 #patch0 sent upstream (Kharec)
